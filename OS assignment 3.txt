@@ -1,0 +1,74 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2865
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 .SFNS-Regular;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red14\green14\blue14;}
+{\*\expandedcolortbl;;\cssrgb\c6700\c6700\c6700;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww37860\viewh21260\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf2 #include <stdio.h>
+\f1\fs24 \cf0 \
+\
+
+\f0\fs28 \cf2 int main()\
+\{\
+    int bt[4], at[4], ct[4], wt[4], tat[4], st[4], process[4];\
+    int total_tat = 0, total_wt = 0;
+\f1\fs24 \cf0 \
+\
+
+\f0\fs28 \cf2     for (int i = 0; i < 3; i++)\
+    \{\
+        process[i] = i + 1;\
+        printf("Enter details for Process P%d\\n", i + 1);\
+        printf("Arrival Time: ");\
+        scanf("%d", &at[i]);\
+        printf("Burst Time: ");\
+        scanf("%d", &bt[i]);\
+        printf("\\n");\
+    \}
+\f1\fs24 \cf0 \
+\
+
+\f0\fs28 \cf2     st[0] = at[0];\
+    ct[0] = st[0] + bt[0];\
+    tat[0] = ct[0] - at[0];\
+    wt[0] = tat[0] - bt[0];\
+    total_tat = tat[0];\
+    total_wt = wt[0];
+\f1\fs24 \cf0 \
+\
+
+\f0\fs28 \cf2     for (int i = 1; i < 3; i++)\
+    \{\
+        if (at[i] > ct[i - 1])\
+            st[i] = at[i];\
+        else\
+            st[i] = ct[i - 1];
+\f1\fs24 \cf0 \
+\
+
+\f0\fs28 \cf2         ct[i] = st[i] + bt[i];\
+        tat[i] = ct[i] - at[i];\
+        wt[i] = tat[i] - bt[i];\
+        total_tat = tat[i];  \
+        total_wt = wt[i];    \
+    \}
+\f1\fs24 \cf0 \
+\
+
+\f0\fs28 \cf2     printf("\\n%-10s%-10s%-10s%-10s%-10s%-10s\\n", "Process", "AT", "BT", "CT", "TAT", "WT");\
+    for (int i = 0; i < 3; i++)\
+    \{\
+        printf("P%-9d%-10d%-10d%-10d%-10d%-10d\\n",\
+               process[i], at[i], bt[i], ct[i], tat[i], wt[i]);\
+    \}
+\f1\fs24 \cf0 \
+\
+
+\f0\fs28 \cf2     printf("\\nAverage Turnaround Time = %d\\n", total_tat / 3);\
+    printf("Average Waiting Time    = %d\\n", total_wt / 3);
+\f1\fs24 \cf0 \
+\
+
+\f0\fs28 \cf2     return 0;\
+\}}
